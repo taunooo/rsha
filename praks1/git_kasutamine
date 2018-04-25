@@ -23,3 +23,14 @@ a) git remote add nimi aadress
 git remote add skriptimine https://github.com/taunooo/rsha.git
 
 b) git remote kontroll git remote -v
+
+põhikasutamine:
+
+a) pane fial jälgimisele
+git add failinimi
+
+b) lisa kirjelduse muudatuse kohta
+git commit -m "lühikirjeldus"
+
+c) lisa kaugrepositooriumi
+git push -uf skriptimine master
