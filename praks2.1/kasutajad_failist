@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+for nimi in $(cat kasutajad);
+	do
+	sh lisa_kasutaja $nimi
+	done
+

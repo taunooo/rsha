@@ -1,0 +1,5 @@
+#!/bin/bash
+
+kasutaja=$1
+
+useradd $kasutaja -m -s /bin/bash
