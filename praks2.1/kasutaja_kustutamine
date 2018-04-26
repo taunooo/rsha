@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+#kustutame kasutajad kasutaja failist
+
+for nimi in $(cat kasutajad);
+	do
+	userdel -r $nimi
+	done
