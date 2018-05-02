@@ -1,0 +1,4 @@
+if dpkg-query -W -f='Apache2 on edukalt installeeritud!' apache2
+	then echo  ""
+else apt-get install apache2 -y
+fi
