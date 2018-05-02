@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+#for nimi in $(cat kasutajad);
+#       do
+#       sh lisa_kasutaja $nimi
+#       done
+
+for nimi in $(cat kasutajad);
+#parool=(cat kasutajad_paroolid)
+
+do
+        sh lisa_kasutaja $nimi
+
+done
+
+for parool in $(cat paroolid);
+
+do
+        echo $nimi:$parool | chpasswd
+done
+
+

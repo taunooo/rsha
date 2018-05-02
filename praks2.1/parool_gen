@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+while read nimi
+do
+	kasutaja=$nimi
+	parool=$(pwgen 7)
+	echo "$kasutaja parool on $parool"
+	useradd -m -s /bin/bash $kasutaja
+	echo "$kasutaja:$parool" | chpasswd
+	echo "$kasutaja:$parool" >>  "genkasutajaparool"
+done < $1
