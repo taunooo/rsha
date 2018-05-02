@@ -1,0 +1,6 @@
+sh /home/user/rsha/praks3/apache_install
+sh /home/user/rsha/praks3/php_install
+if dpkg-query -W -f='Phpmyadmin on edukalt installeeritud.' phpmyadmin
+	then echo ""
+else apt-get install phpmyadmin -y
+fi

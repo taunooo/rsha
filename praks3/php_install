@@ -1,0 +1,5 @@
+if dpkg-query -W -f='Php7.0 on paigaldatud' php7.0 php-pear php7.0-mysql
+	then dpkg -l | grep php
+else apt-get install php7.0 php-pear php7.0-mysql -y
+ 
+fi

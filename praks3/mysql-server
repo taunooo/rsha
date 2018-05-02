@@ -1,0 +1,6 @@
+
+sh /home/user/rsha/praks3/apache_install
+if dpkg-query -W -f='Mysql server installeeritud' mysql-server
+	then echo ""  
+else apt-get install mysql-server -y
+fi
