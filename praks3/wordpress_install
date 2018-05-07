@@ -1,0 +1,40 @@
+#!/bin/bash
+if  dpkg-query -W -f='${Status}' apache2 libapache2-mod-php7.0 php7.0 php7.0-mysql mysql-server phpmyadmin | grep -c "ok installed"
+then
+echo "Andmebaasi nimi: "
+read dbname
+echo "Andmebaasi kasutaja: "
+read dbuser
+echo "Andmebaasi parool: "
+read dbpass
+
+mysql -e "echo "CREATE USER '$dbuser'@'localhost' IDENTIFIED BY '$dbpass';" 
+mysql -e "CREATE DATABASE $dbname"
+mysql -e "GRANT ALL PRIVILEGES ON $dbname.* TO '$dbuser'@'localhost' IDENTIFIED BY '$dbpass';"
+mysql -e "FLUSH PRIVILEGES;"
+
+curl -O https://wordpress.org/latest.tar.gz
+tar -zxvf latest.tar.gz
+cd wordpress
+cp -rf . /var/www/html/wordpress
+cd /var/www/html/wordpress
+cp wp-config-sample.php wp-config.php
+perl -pi -e "s/database_name_here/$dbname/g" wp-config.php
+perl -pi -e "s/username_here/$dbuser/g" wp-config.php
+perl -pi -e "s/password_here/$dbpass/g" wp-config.php
+
+perl -i -pe'
+  BEGIN {
+    @chars = ("a" .. "z", "A" .. "Z", 0 .. 9);
+    push @chars, split //, "!@#$%^&*()-_ []{}<>~\`+=,.;:/?|";
+    sub salt { join "", map $chars[ rand @chars ], 1 .. 64 }
+  }
+  s/put your unique phrase here/salt()/ge
+' wp-config.php
+
+mkdir wp-content/uploads
+chmod 775 wp-content/uploads
+echo "Wordpress on paigaldatud!"
+else
+	echo "Enne on vaja apache, php, mysql-server ja phpmyadmin paketid installeerida!"
+fi
